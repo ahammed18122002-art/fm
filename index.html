@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agency Membership and Agreement Form | ECHO</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0f172a;
+            --accent: #00e5ff;
+            --accent-dark: #0284c7;
+            --neon-green: #10b981;
+            --bg-color: #070d19;
+            --card-bg: rgba(15, 23, 42, 0.92);
+            --card-inner: #1e293b;
+            --border: #334155;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Subtle Background Word Rain */
+        #wordRainBg {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+            opacity: 0.14;
+        }
+
+        .rain-word {
+            position: absolute;
+            top: -40px;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 600;
+            color: #38bdf8;
+            user-select: none;
+            white-space: nowrap;
+            text-shadow: 0 0 8px rgba(56, 189, 248, 0.35);
+            animation: wordFall linear infinite;
+        }
+
+        @keyframes wordFall {
+            0% {
+                transform: translateY(-10vh);
+            }
+            100% {
+                transform: translateY(112vh);
+            }
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 960px;
+            width: 100%;
+            margin: 0 auto;
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(56, 189, 248, 0.25);
+            border-radius: 14px;
+            box-shadow: 0 18px 45px rgba(0, 0, 0, 0.55);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #040811 0%, #0f172a 55%, #0c4a6e 100%);
+            color: #ffffff;
+            padding: 32px 24px;
+            text-align: center;
+            border-bottom: 1px solid rgba(0, 229, 255, 0.28);
+        }
+
+        .header h1 {
+            font-size: clamp(21px, 4vw, 29px);
+            font-weight: 700;
+            letter-spacing: -0.3px;
+            margin-bottom: 6px;
+        }
+
+        .header p {
+            font-family: 'JetBrains Mono', monospace;
+            color: #7dd3fc;
+            font-size: clamp(12px, 2.4vw, 13.5px);
+            letter-spacing: 0.6px;
+        }
+
+        .form-body {
+            padding: 30px;
+        }
+
+        .section-title {
+            font-size: clamp(16px, 3vw, 18px);
+            font-weight: 700;
+            color: #38bdf8;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 8px;
+            margin: 28px 0 18px 0;
+        }
+
+        .section-title:first-child {
+            margin-top: 0;
+        }
+
+        /* Agreement Box */
+        .agreement-box {
+            background: rgba(2, 6, 23, 0.75);
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--accent);
+            border-radius: 8px;
+            padding: 16px;
+            max-height: 280px;
+            overflow-y: auto;
+            font-size: 13.5px;
+            color: #cbd5e1;
+            margin-bottom: 14px;
+        }
+
+        .agreement-box h4 {
+            color: #7dd3fc;
+            font-size: 14px;
+            margin: 12px 0 5px 0;
+        }
+
+        .agreement-box h4:first-child {
+            margin-top: 0;
+        }
+
+        .agreement-box ul {
+            margin-left: 18px;
+        }
+
+        .agreement-box li {
+            margin-bottom: 5px;
+        }
+
+        .agreement-choice {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+            background: rgba(14, 165, 233, 0.12);
+            border: 1px solid rgba(56, 189, 248, 0.35);
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-bottom: 18px;
+        }
+
+        .choice-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            margin: 0;
+            color: #f8fafc;
+        }
+
+        .choice-label input[type="radio"] {
+            width: 17px;
+            height: 17px;
+            accent-color: var(--accent);
+        }
+
+        /* Responsive Grids */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 6px;
+            font-size: 14px;
+            color: #e2e8f0;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        textarea {
+            width: 100%;
+            padding: 11px 13px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: inherit;
+            color: #f8fafc;
+            background: rgba(15, 23, 42, 0.85);
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        input::placeholder, textarea::placeholder {
+            color: #64748b;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(0, 229, 255, 0.16);
+        }
+
+        /* Upload Box */
+        .upload-box {
+            border: 2px dashed #475569;
+            border-radius: 8px;
+            padding: 16px;
+            text-align: center;
+            background: rgba(2, 6, 23, 0.55);
+        }
+
+        .upload-box input[type="file"] {
+            width: 100%;
+            font-size: 13px;
+            color: #cbd5e1;
+        }
+
+        .preview-img {
+            max-width: 115px;
+            max-height: 115px;
+            margin-top: 10px;
+            border-radius: 8px;
+            display: none;
+            object-fit: cover;
+            border: 1px solid #38bdf8;
+        }
+
+        .preview-sig {
+            max-width: 175px;
+            max-height: 68px;
+            margin-top: 10px;
+            display: none;
+            object-fit: contain;
+            background: #ffffff;
+            padding: 4px;
+            border-radius: 4px;
+            border: 1px solid #38bdf8;
+        }
+
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 10px;
+            background: rgba(2, 6, 23, 0.6);
+            padding: 16px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+
+        .skill-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            font-size: 13.5px;
+            margin: 0;
+            color: #e2e8f0;
+        }
+
+        .skill-item input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            accent-color: var(--accent);
+            flex-shrink: 0;
+        }
+
+        /* Hat & Team Cards */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 12px;
+        }
+
+        .option-card {
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 12px 36px 12px 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+            background: rgba(15, 23, 42, 0.8);
+            margin: 0;
+        }
+
+        .option-card:hover {
+            border-color: var(--accent);
+            background: rgba(30, 41, 59, 0.95);
+        }
+
+        .option-card input[type="radio"] {
+            position: absolute;
+            top: 14px;
+            right: 12px;
+            width: 17px;
+            height: 17px;
+            accent-color: var(--accent);
+        }
+
+        .card-title {
+            font-weight: 700;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            margin-bottom: 4px;
+            color: #f8fafc;
+        }
+
+        .color-dot {
+            display: inline-block;
+            width: 11px;
+            height: 11px;
+            border-radius: 50%;
+            border: 1px solid #94a3b8;
+            flex-shrink: 0;
+        }
+
+        .card-desc {
+            font-size: 12.5px;
+            color: var(--text-muted);
+            line-height: 1.45;
+        }
+
+        /* Action Buttons */
+        .btn-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-top: 30px;
+            padding-top: 22px;
+            border-top: 1px solid #334155;
+        }
+
+        button {
+            flex: 1;
+            min-width: 210px;
+            padding: 14px 20px;
+            font-size: 15px;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: inherit;
+            transition: all 0.2s;
+        }
+
+        .btn-html {
+            background: linear-gradient(135deg, #0284c7, #00b4d8);
+            color: #ffffff;
+        }
+
+        .btn-html:hover {
+            filter: brightness(1.08);
+        }
+
+        .btn-register {
+            background: linear-gradient(135deg, #059669, #10b981);
+            color: #ffffff;
+        }
+
+        .btn-register:hover {
+            filter: brightness(1.08);
+        }
+
+        button:disabled {
+            opacity: 0.65;
+            cursor: not-allowed;
+        }
+
+        .status-banner {
+            display: none;
+            margin-top: 16px;
+            padding: 13px 16px;
+            border-radius: 8px;
+            background: rgba(16, 185, 129, 0.14);
+            border: 1px solid rgba(16, 185, 129, 0.5);
+            color: #6ee7b7;
+            font-size: 13.5px;
+            font-weight: 500;
+        }
+
+        /* Mobile & Tablet Responsive Adjustments */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            .header {
+                padding: 24px 16px;
+            }
+            .form-body {
+                padding: 18px 16px;
+            }
+            .grid-2 {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+            .skills-grid {
+                grid-template-columns: 1fr;
+                padding: 12px;
+            }
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+            .btn-group {
+                flex-direction: column;
+            }
+            button {
+                width: 100%;
+                min-width: 100%;
+            }
+        }
+
+        @media print {
+            #wordRainBg {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Subtle Background Word Rain -->
+    <div id="wordRainBg" aria-hidden="true"></div>
+
+    <div class="container">
+        <div class="header">
+            <h1>Agency Membership and Agreement Form</h1>
+            <p>ECHO Ethical Cyber Hunt Operation</p>
+        </div>
+
+        <form id="agencyForm" class="form-body">
+            <!-- Agreement Section -->
+            <div class="section-title">Agency Membership, Security &amp; Investment Agreement</div>
+            <div class="agreement-box">
+                <h4>1. Data Security, Confidentiality &amp; Anti-Intrusion</h4>
+                <ul>
+                    <li>All personal data, client credentials, internal architecture, proprietary tools, and business records submitted or accessed through the agency are strictly confidential and must never be shared with unauthorized third parties.</li>
+                    <li>Members must enforce strong authentication, endpoint protection, and secure handling practices to prevent unauthorized access, data leaks, or cyber intrusions.</li>
+                    <li>Any unauthorized scanning, exploitation, tampering, or malicious activity against agency systems, client assets, or fellow members is strictly prohibited and subject to immediate termination and legal action.</li>
+                </ul>
+
+                <h4>2. Investment Lock-In Period &amp; Early Withdrawal Rules</h4>
+                <ul>
+                    <li>Financial investments made into the agency require a fixed lock-in commitment period (such as <strong>3 years or 5 years</strong>, as mutually agreed upon at the time of investment).</li>
+                    <li>If a member requests to break the agreement or withdraw capital before the lock-in period ends, the principal investment is not automatically withdrawable on demand.</li>
+                    <li>Any early or special withdrawal requires formal review and approval from the responsible management/leadership, active members, and existing shareholders.</li>
+                </ul>
+
+                <h4>3. Dual Contribution Model (Capital &amp; Skill) &amp; Active Participation</h4>
+                <ul>
+                    <li><strong>Capital Track:</strong> Members who invest funds earn returns proportional to their verified capital contribution and agreed terms.</li>
+                    <li><strong>Skill Track:</strong> Members who invest skills have their contribution valued based on verified deliverables, technical execution, and agency impact.</li>
+                    <li><strong>No Passive Free-Riding:</strong> Passive inactivity without corresponding capital investment or active work output does not entitle a member to unearned income. Revenue and rewards align with actual capital invested and work/value delivered.</li>
+                </ul>
+            </div>
+
+            <div class="agreement-choice">
+                <label class="choice-label">
+                    <input type="radio" name="agreementStatus" value="I Agree" required>
+                    I Agree
+                </label>
+                <label class="choice-label">
+                    <input type="radio" name="agreementStatus" value="I Disagree" required>
+                    I Disagree
+                </label>
+            </div>
+
+            <!-- 1. Personal Information -->
+            <div class="section-title">1. Personal Information</div>
+            <div class="grid-2">
+                <div class="form-group">
+                    <label for="fullName">Full Name *</label>
+                    <input type="text" id="fullName" required placeholder="e.g., MD. Ahammed">
+                </div>
+                <div class="form-group">
+                    <label for="bestWork">Best Specialty / Work You Excel At *</label>
+                    <input type="text" id="bestWork" required placeholder="e.g., Web Penetration Testing & Graphic Design">
+                </div>
+                <div class="form-group">
+                    <label for="currentAddress">Current Address *</label>
+                    <input type="text" id="currentAddress" required placeholder="House, Street, City, Country">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address *</label>
+                    <input type="email" id="email" required placeholder="name@example.com">
+                </div>
+                <div class="form-group">
+                    <label for="phone">Mobile Number *</label>
+                    <input type="tel" id="phone" required placeholder="+880 1XXX-XXXXXX">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="permanentAddress">Permanent Address *</label>
+                <input type="text" id="permanentAddress" required placeholder="Village/Ward, Post Office, Upazila, District, Country">
+            </div>
+
+            <!-- 2. Profile Photo & Digital Signature -->
+            <div class="section-title">2. Profile Photo &amp; Digital Signature</div>
+            <div class="grid-2">
+                <div class="form-group upload-box">
+                    <label for="profilePic">Upload Profile Photo *</label>
+                    <input type="file" id="profilePic" accept="image/*" required onchange="previewImage(this, 'picPreview')">
+                    <br>
+                    <img id="picPreview" class="preview-img" alt="Profile Preview">
+                </div>
+                <div class="form-group upload-box">
+                    <label for="signaturePic">Upload Digital Signature *</label>
+                    <input type="file" id="signaturePic" accept="image/*" required onchange="previewImage(this, 'sigPreview')">
+                    <br>
+                    <img id="sigPreview" class="preview-sig" alt="Signature Preview">
+                </div>
+            </div>
+
+            <!-- 3. Skills -->
+            <div class="section-title">3. Skills (Select Multiple)</div>
+            <div class="skills-grid">
+                <label class="skill-item"><input type="checkbox" name="skills" value="Web Design"> Web Design</label>
+                <label class="skill-item"><input type="checkbox" name="skills" value="Web Development"> Web Development</label>
+                <label class="skill-item"><input type="checkbox" name="skills" value="Graphic Design"> Graphic Design</label>
+                <label class="skill-item"><input type="checkbox" name="skills" value="Logo & Brand Identity"> Logo &amp; Brand Identity</label>
+                <label class="skill-item"><input type="checkbox" name="skills" value="UI/UX Design"> UI/UX Design</label>
+                <label class="skill-item"><input type="checkbox" name="skills" value="Photo Editing & Retouching"> Photo Editing &amp; Retouching</label>
+                <label class="skill-item"><input type="checkbox" name="skills" value="Cyber Security Penetration Testing"> Cyber Security Penetration Testing</label>
+                <label class="skill-item"><input type="checkbox" name="skills" value="Web Application Security"> Web Application Security</label>
+                <label class="skill-item"><input type="checkbox" name="skills" value="Vulnerability Assessment"> Vulnerability Assessment</label>
+                <label class="skill-item"><input type="checkbox" name="skills" value="Bug Bounty Hunting"> Bug Bounty Hunting</label>
+                <label class="skill-item"><input type="checkbox" name="skills" value="Network Security"> Network Security</label>
+                <label class="skill-item"><input type="checkbox" name="skills" value="Incident Response & Forensics"> Incident Response &amp; Forensics</label>
+                <label class="skill-item"><input type="checkbox" name="skills" value="Malware Analysis"> Malware Analysis</label>
+                <label class="skill-item"><input type="checkbox" name="skills" value="Cloud Security"> Cloud Security</label>
+                <label class="skill-item"><input type="checkbox" name="skills" value="OSINT & Threat Intelligence"> OSINT &amp; Threat Intelligence</label>
+                <label class="skill-item"><input type="checkbox" name="skills" value="Video Editing & Motion Graphics"> Video Editing &amp; Motion Graphics</label>
+                <label class="skill-item"><input type="checkbox" name="skills" value="SEO & Digital Marketing"> SEO &amp; Digital Marketing</label>
+                <label class="skill-item"><input type="checkbox" name="skills" value="Content & Copywriting"> Content &amp; Copywriting</label>
+                <label class="skill-item"><input type="checkbox" name="skills" value="Mobile App Development"> Mobile App Development</label>
+                <label class="skill-item"><input type="checkbox" name="skills" value="API & Automation Scripting"> API &amp; Automation Scripting</label>
+            </div>
+            <div class="form-group" style="margin-top: 12px;">
+                <label for="otherSkills">Other Skills or Tools (Comma-separated)</label>
+                <input type="text" id="otherSkills" placeholder="e.g., Burp Suite, Figma, Adobe Illustrator, Photoshop, Nmap, Python">
+            </div>
+
+            <!-- 4. Cyber Security Hat -->
+            <div class="section-title">4. Cyber Security Hat</div>
+            <div class="card-grid">
+                <label class="option-card">
+                    <input type="radio" name="cyberHat" value="White Hat" data-desc="Ethical security practitioners who discover vulnerabilities with permission and help organizations strengthen defenses." required>
+                    <div class="card-title"><span class="color-dot" style="background:#ffffff;"></span> White Hat</div>
+                    <div class="card-desc">Ethical security practitioners who identify flaws and help secure systems with authorization.</div>
+                </label>
+
+                <label class="option-card">
+                    <input type="radio" name="cyberHat" value="Grey Hat" data-desc="Practitioners who may probe systems without prior permission, typically avoiding harm and notifying owners of flaws.">
+                    <div class="card-title"><span class="color-dot" style="background:#94a3b8;"></span> Grey Hat</div>
+                    <div class="card-desc">Blends ethical and unauthorized probing, generally alerting owners rather than causing damage.</div>
+                </label>
+
+                <label class="option-card">
+                    <input type="radio" name="cyberHat" value="Red Hat" data-desc="Aggressive defensive operators focused on actively countering malicious threat actors and disrupting attacks.">
+                    <div class="card-title"><span class="color-dot" style="background:#dc2626;"></span> Red Hat</div>
+                    <div class="card-desc">Takes an aggressive stance against malicious hackers to stop active threats and intrusions.</div>
+                </label>
+
+                <label class="option-card">
+                    <input type="radio" name="cyberHat" value="Black Hat" data-desc="Malicious or unauthorized intrusion classification used for threat modeling, adversary emulation, and risk analysis.">
+                    <div class="card-title"><span class="color-dot" style="background:#0f172a;"></span> Black Hat</div>
+                    <div class="card-desc">Represents malicious threat actors; used in risk analysis and adversary behavior modeling.</div>
+                </label>
+
+                <label class="option-card">
+                    <input type="radio" name="cyberHat" value="Blue Hat" data-desc="External security specialists brought in to test software or systems for bugs and weaknesses prior to release.">
+                    <div class="card-title"><span class="color-dot" style="background:#2563eb;"></span> Blue Hat</div>
+                    <div class="card-desc">External security testers evaluating systems and builds for vulnerabilities before launch.</div>
+                </label>
+
+                <label class="option-card">
+                    <input type="radio" name="cyberHat" value="Green Hat" data-desc="Newcomers and learners actively studying security concepts, tools, and practical fundamentals.">
+                    <div class="card-title"><span class="color-dot" style="background:#16a34a;"></span> Green Hat</div>
+                    <div class="card-desc">Learners and beginners actively building skills and experience in cyber security.</div>
+                </label>
+
+                <label class="option-card">
+                    <input type="radio" name="cyberHat" value="Purple Hat" data-desc="Bridges offensive testing and defensive hardening to improve detection, response, and resilience.">
+                    <div class="card-title"><span class="color-dot" style="background:#7c3aed;"></span> Purple Hat</div>
+                    <div class="card-desc">Combines offensive testing insights with defensive hardening to improve overall security.</div>
+                </label>
+            </div>
+
+            <!-- 5. Cyber Security Team -->
+            <div class="section-title">5. Cyber Security Team</div>
+            <div class="card-grid">
+                <label class="option-card">
+                    <input type="radio" name="cyberTeam" value="White Team" data-desc="Referees, planners, and evaluators who set rules, monitor exercises, and score operational outcomes." required>
+                    <div class="card-title"><span class="color-dot" style="background:#ffffff;"></span> White Team</div>
+                    <div class="card-desc">Oversees rules, governance, exercise objectives, and objective evaluation.</div>
+                </label>
+
+                <label class="option-card">
+                    <input type="radio" name="cyberTeam" value="Red Team" data-desc="Adversary simulation specialists who test defenses using realistic attack techniques and scenarios.">
+                    <div class="card-title"><span class="color-dot" style="background:#dc2626;"></span> Red Team</div>
+                    <div class="card-desc">Simulates real-world attacks and penetration scenarios to test organizational defenses.</div>
+                </label>
+
+                <label class="option-card">
+                    <input type="radio" name="cyberTeam" value="Blue Team" data-desc="Defensive operations specialists responsible for monitoring, detection, hardening, and incident response.">
+                    <div class="card-title"><span class="color-dot" style="background:#2563eb;"></span> Blue Team</div>
+                    <div class="card-desc">Defends infrastructure through continuous monitoring, threat detection, and response.</div>
+                </label>
+
+                <label class="option-card">
+                    <input type="radio" name="cyberTeam" value="Purple Team" data-desc="Collaborative unit aligning Red Team findings with Blue Team detections and playbooks.">
+                    <div class="card-title"><span class="color-dot" style="background:#7c3aed;"></span> Purple Team</div>
+                    <div class="card-desc">Aligns Red and Blue teams so attack insights rapidly improve detection and defense.</div>
+                </label>
+
+                <label class="option-card">
+                    <input type="radio" name="cyberTeam" value="Yellow Team" data-desc="Builders and developers who integrate secure architecture, secure coding, and resilient design into systems.">
+                    <div class="card-title"><span class="color-dot" style="background:#eab308;"></span> Yellow Team</div>
+                    <div class="card-desc">Focuses on secure development, architecture design, and building resilient systems.</div>
+                </label>
+            </div>
+
+            <!-- 6. Career Summary -->
+            <div class="section-title">6. Career Summary</div>
+            <div class="form-group">
+                <label for="careerSummary">Career Summary *</label>
+                <textarea id="careerSummary" rows="3" required placeholder="Summarize your background, technical/creative strengths, and professional profile..."></textarea>
+            </div>
+
+            <!-- 7. Goal -->
+            <div class="section-title">7. Goal</div>
+            <div class="form-group">
+                <label for="goal">Goal *</label>
+                <textarea id="goal" rows="3" required placeholder="State your short-term and long-term goals within the agency..."></textarea>
+            </div>
+
+            <!-- Work Experience -->
+            <div class="section-title">Work Experience</div>
+            <div class="form-group">
+                <label for="experience">Work Experience</label>
+                <textarea id="experience" rows="3" placeholder="e.g., Penetration Tester & Brand Designer at Agency / Freelance Projects..."></textarea>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="btn-group">
+                <button type="button" class="btn-html" onclick="downloadHTMLCV()">Download HTML CV</button>
+                <button type="button" class="btn-register" id="registerBtn" onclick="registerAndSendHTML()">Register</button>
+            </div>
+
+            <div class="status-banner" id="statusBanner"></div>
+        </form>
+    </div>
+
+    <script>
+        const TARGET_GMAIL = "mdmh18122002@gmail.com";
+        let profileBase64 = "";
+        let signatureBase64 = "";
+
+        // Initialize subtle background word rain
+        (function initWordRain() {
+            const container = document.getElementById("wordRainBg");
+            const words = [
+                "ECHO", "ETHICAL", "CYBER", "HUNT", "RECON",
+                "AUDIT", "SHIELD", "TRACE", "0x4543484F", "PATCH",
+                "DEFENSE", "INTEL", "VULN", "SOC", "OPS"
+            ];
+            const count = window.innerWidth < 600 ? 18 : 34;
+
+            for (let i = 0; i < count; i++) {
+                const span = document.createElement("span");
+                span.className = "rain-word";
+                span.textContent = words[i % words.length];
+                span.style.left = `${(i * (100 / count)) + (Math.random() * 3)}%`;
+                span.style.fontSize = `${11 + Math.floor(Math.random() * 5)}px`;
+                const duration = 11 + Math.random() * 14;
+                span.style.animationDuration = `${duration}s`;
+                span.style.animationDelay = `-${Math.random() * duration}s`;
+                container.appendChild(span);
+            }
+        })();
+
+        function previewImage(input, previewId) {
+            const file = input.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = document.getElementById(previewId);
+                img.src = e.target.result;
+                img.style.display = "inline-block";
+
+                if (previewId === "picPreview") {
+                    profileBase64 = e.target.result;
+                } else if (previewId === "sigPreview") {
+                    signatureBase64 = e.target.result;
+                }
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function escapeHtml(str) {
+            return String(str || "")
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
+        function collectFormData() {
+            const form = document.getElementById("agencyForm");
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return null;
+            }
+
+            const agreementEl = document.querySelector('input[name="agreementStatus"]:checked');
+            const selectedSkills = Array.from(document.querySelectorAll('input[name="skills"]:checked'))
+                .map(cb => cb.value);
+
+            const otherSkillsRaw = document.getElementById("otherSkills").value.trim();
+            if (otherSkillsRaw) {
+                const extraSkills = otherSkillsRaw.split(",").map(s => s.trim()).filter(Boolean);
+                selectedSkills.push(...extraSkills);
+            }
+
+            const selectedHat = document.querySelector('input[name="cyberHat"]:checked');
+            const selectedTeam = document.querySelector('input[name="cyberTeam"]:checked');
+
+            return {
+                generatedDate: new Date().toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric"
+                }),
+                agreementStatus: agreementEl ? agreementEl.value : "",
+                fullName: document.getElementById("fullName").value.trim(),
+                bestWork: document.getElementById("bestWork").value.trim(),
+                currentAddress: document.getElementById("currentAddress").value.trim(),
+                email: document.getElementById("email").value.trim(),
+                phone: document.getElementById("phone").value.trim(),
+                permanentAddress: document.getElementById("permanentAddress").value.trim(),
+                profilePhoto: profileBase64,
+                signaturePhoto: signatureBase64,
+                skills: selectedSkills,
+                hat: selectedHat ? selectedHat.value : "",
+                hatDesc: selectedHat ? selectedHat.getAttribute("data-desc") : "",
+                team: selectedTeam ? selectedTeam.value : "",
+                teamDesc: selectedTeam ? selectedTeam.getAttribute("data-desc") : "",
+                careerSummary: document.getElementById("careerSummary").value.trim(),
+                goal: document.getElementById("goal").value.trim(),
+                workExperience: document.getElementById("experience").value.trim()
+            };
+        }
+
+        // Builds a standalone dark hacking-mode HTML CV with A4 print mode
+        function buildHackingHTMLCV(data) {
+            const skillTags = data.skills.length > 0
+                ? data.skills.map(s => `<span class="skill-chip">${escapeHtml(s)}</span>`).join("")
+                : `<span class="muted">No skills selected</span>`;
+
+            return `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>${escapeHtml(data.fullName)} - ECHO Cyber CV</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #050b14;
+    --panel: #0b1526;
+    --panel-2: #0f1f38;
+    --border: #1e3a5f;
+    --cyan: #00f0ff;
+    --green: #10b981;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    padding: 24px 14px;
+    line-height: 1.55;
+  }
+  .toolbar {
+    max-width: 820px;
+    margin: 0 auto 14px auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .tag-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--cyan);
+    background: rgba(0, 240, 255, 0.08);
+    border: 1px solid rgba(0, 240, 255, 0.35);
+    padding: 6px 12px;
+    border-radius: 6px;
+  }
+  .print-btn {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    font-weight: 600;
+    background: linear-gradient(135deg, #0284c7, #00e5ff);
+    color: #030712;
+    border: none;
+    padding: 9px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  .cv-sheet {
+    max-width: 820px;
+    margin: 0 auto;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    box-shadow: 0 0 35px rgba(0, 240, 255, 0.08);
+    border-radius: 10px;
+    padding: 28px;
+  }
+  .top-banner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 18px;
+    padding-bottom: 18px;
+    margin-bottom: 18px;
+    border-bottom: 1px solid rgba(0, 240, 255, 0.35);
+  }
+  .op-line {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    color: var(--green);
+    letter-spacing: 0.8px;
+    margin-bottom: 4px;
+  }
+  .name-title {
+    font-size: 26px;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 4px;
+  }
+  .specialty {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--cyan);
+    margin-bottom: 8px;
+  }
+  .meta-grid {
+    font-size: 12px;
+    color: var(--muted);
+    display: grid;
+    gap: 3px;
+  }
+  .meta-grid strong { color: #cbd5e1; }
+  .avatar {
+    width: 108px;
+    height: 108px;
+    border-radius: 8px;
+    object-fit: cover;
+    border: 2px solid var(--cyan);
+    flex-shrink: 0;
+  }
+  .sec {
+    margin-bottom: 15px;
+  }
+  .sec-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12.5px;
+    color: var(--cyan);
+    background: var(--panel-2);
+    border-left: 3px solid var(--green);
+    padding: 6px 10px;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+  }
+  .sec-body {
+    font-size: 13px;
+    color: #dbeafe;
+    white-space: pre-line;
+  }
+  .skills-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .skill-chip {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: #a5f3fc;
+    background: rgba(14, 165, 233, 0.14);
+    border: 1px solid rgba(56, 189, 248, 0.35);
+    padding: 4px 9px;
+    border-radius: 4px;
+  }
+  .ops-box {
+    background: var(--panel-2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 10px 12px;
+    font-size: 12.5px;
+  }
+  .ops-row + .ops-row { margin-top: 7px; }
+  .ops-key {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--green);
+    font-weight: 600;
+  }
+  .footer {
+    margin-top: 22px;
+    padding-top: 14px;
+    border-top: 1px dashed var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 16px;
+  }
+  .footer-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+  }
+  .sig-area { text-align: center; }
+  .sig-img {
+    max-width: 145px;
+    max-height: 52px;
+    display: block;
+    margin: 0 auto 4px auto;
+    background: #ffffff;
+    padding: 3px;
+    border-radius: 4px;
+  }
+  .sig-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--cyan);
+    border-top: 1px solid var(--cyan);
+    padding-top: 4px;
+    min-width: 145px;
+  }
+  .muted { color: var(--muted); font-size: 12px; }
+
+  /* A4 Print Mode */
+  @page {
+    size: A4 portrait;
+    margin: 10mm;
+  }
+  @media print {
+    body {
+      background: #050b14 !important;
+      padding: 0 !important;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    .no-print { display: none !important; }
+    .cv-sheet {
+      max-width: 100% !important;
+      width: 100% !important;
+      box-shadow: none !important;
+      border-radius: 6px !important;
+      padding: 18px !important;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="toolbar no-print">
+    <span class="tag-badge">[ECHO // A4 PRINTABLE CYBER CV]</span>
+    <button type="button" class="print-btn" onclick="window.print()">Print / Save A4</button>
+  </div>
+
+  <div class="cv-sheet">
+    <div class="top-banner">
+      <div>
+        <div class="op-line">&gt;_ ECHO ETHICAL CYBER HUNT OPERATION // VERIFIED DOSSIER</div>
+        <div class="name-title">${escapeHtml(data.fullName)}</div>
+        <div class="specialty">[SPECIALTY: ${escapeHtml(data.bestWork)}]</div>
+        <div class="meta-grid">
+          <div><strong>Email:</strong> ${escapeHtml(data.email)} &nbsp;|&nbsp; <strong>Phone:</strong> ${escapeHtml(data.phone)}</div>
+          <div><strong>Current Address:</strong> ${escapeHtml(data.currentAddress)}</div>
+          <div><strong>Permanent Address:</strong> ${escapeHtml(data.permanentAddress)}</div>
+        </div>
+      </div>
+      ${data.profilePhoto ? `<img class="avatar" src="${data.profilePhoto}" alt="Profile Photo">` : ""}
+    </div>
+
+    <div class="sec">
+      <div class="sec-title">01 // Career Summary</div>
+      <div class="sec-body">${escapeHtml(data.careerSummary)}</div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-title">02 // Operational Goal</div>
+      <div class="sec-body">${escapeHtml(data.goal)}</div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-title">03 // Technical &amp; Creative Skills</div>
+      <div class="skills-wrap">${skillTags}</div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-title">04 // Cyber Security Hat &amp; Team</div>
+      <div class="ops-box">
+        <div class="ops-row"><span class="ops-key">HAT:</span> <strong>${escapeHtml(data.hat)}</strong> — ${escapeHtml(data.hatDesc)}</div>
+        <div class="ops-row"><span class="ops-key">TEAM:</span> <strong>${escapeHtml(data.team)}</strong> — ${escapeHtml(data.teamDesc)}</div>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-title">05 // Work Experience</div>
+      <div class="sec-body">${escapeHtml(data.workExperience || "Not specified")}</div>
+    </div>
+
+    <div class="footer">
+      <div class="footer-meta">
+        <div>AGREEMENT: ${escapeHtml(data.agreementStatus)}</div>
+        <div>ISSUED: ${escapeHtml(data.generatedDate)}</div>
+      </div>
+      <div class="sig-area">
+        ${data.signaturePhoto ? `<img class="sig-img" src="${data.signaturePhoto}" alt="Digital Signature">` : ""}
+        <div class="sig-label">AUTHORIZED SIGNATURE</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>`;
+        }
+
+        function triggerHTMLDownload(htmlContent, fileName) {
+            const blob = new Blob([htmlContent], { type: "text/html;charset=utf-8" });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = fileName;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            setTimeout(() => URL.revokeObjectURL(url), 1000);
+        }
+
+        // Download HTML CV Button
+        function downloadHTMLCV() {
+            const data = collectFormData();
+            if (!data) return;
+
+            const safeName = data.fullName.replace(/[^a-zA-Z0-9_-]/g, "_") || "ECHO_Member";
+            const fileName = `${safeName}_ECHO_CV.html`;
+            const htmlDoc = buildHackingHTMLCV(data);
+            triggerHTMLDownload(htmlDoc, fileName);
+
+            const banner = document.getElementById("statusBanner");
+            banner.style.display = "block";
+            banner.innerHTML = `<strong>${escapeHtml(fileName)}</strong> downloaded. Open it in any browser and click <strong>Print / Save A4</strong> for A4 printing.`;
+        }
+
+        // Register Button: Auto-downloads the HTML CV and opens Gmail to mdmh18122002@gmail.com
+        function registerAndSendHTML() {
+            const data = collectFormData();
+            if (!data) return;
+
+            const btn = document.getElementById("registerBtn");
+            const banner = document.getElementById("statusBanner");
+            const safeName = data.fullName.replace(/[^a-zA-Z0-9_-]/g, "_") || "ECHO_Member";
+            const fileName = `${safeName}_ECHO_CV.html`;
+
+            btn.disabled = true;
+            btn.textContent = "Downloading HTML & Opening Gmail...";
+
+            const htmlDoc = buildHackingHTMLCV(data);
+            triggerHTMLDownload(htmlDoc, fileName);
+
+            const subject = encodeURIComponent(`ECHO Registration & HTML CV - ${data.fullName}`);
+            const body = encodeURIComponent(
+                `Hello,\n\n` +
+                `Please find my ECHO Ethical Cyber Hunt Operation registration details below.\n` +
+                `The generated HTML CV file (${fileName}) has been downloaded to my device—attaching it here:\n\n` +
+                `• Agreement Status: ${data.agreementStatus}\n` +
+                `• Full Name: ${data.fullName}\n` +
+                `• Best Specialty: ${data.bestWork}\n` +
+                `• Email: ${data.email}\n` +
+                `• Mobile: ${data.phone}\n` +
+                `• Current Address: ${data.currentAddress}\n` +
+                `• Permanent Address: ${data.permanentAddress}\n` +
+                `• Cyber Security Hat: ${data.hat}\n` +
+                `• Cyber Security Team: ${data.team}\n` +
+                `• Skills: ${data.skills.join(", ") || "None"}\n\n` +
+                `Career Summary:\n${data.careerSummary}\n\n` +
+                `Goal:\n${data.goal}\n\n` +
+                `Work Experience:\n${data.workExperience || "N/A"}\n\n` +
+                `Regards,\n${data.fullName}`
+            );
+
+            const gmailWebUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(TARGET_GMAIL)}&su=${subject}&body=${body}`;
+            const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+            banner.style.display = "block";
+            banner.innerHTML = `<strong>${escapeHtml(fileName)}</strong> downloaded! Opening Gmail to <strong>${TARGET_GMAIL}</strong> — please attach <strong>${escapeHtml(fileName)}</strong> and hit Send.`;
+
+            if (isMobile) {
+                window.location.href = `mailto:${TARGET_GMAIL}?subject=${subject}&body=${body}`;
+            } else {
+                window.open(gmailWebUrl, "_blank");
+            }
+
+            setTimeout(() => {
+                btn.disabled = false;
+                btn.textContent = "Register";
+            }, 1200);
+        }
+    </script>
+</body>
+</html>
